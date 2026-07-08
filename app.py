@@ -16,12 +16,14 @@ def index():
 # CONFIGURAÇÕES DE E-MAIL (Exemplo usando Gmail)
 # Dica: Para o Gmail, você precisará criar uma "Senha de App" nas configurações de segurança
 EMAIL_QUE_ENVIA = "vinithomazelli@gmail.com"
-SENHA_DE_APP = "ummn rtxc rslb rchs"
+SENHA_DE_APP = os.environ.get("GMAIL_PASSWORD")
 EMAIL_QUE_RECEBE = "contato.cia.dev@gmail.com"
 
 
 def enviar_email_notificacao(conteudo):
     """Função que dispara o e-mail para você"""
+   def enviar_email_notificacao(conteudo):
+    """Função atualizada para usar SSL na porta 465 (melhor para servidores em nuvem)"""
     mensagem = MIMEMultipart()
     mensagem['From'] = EMAIL_QUE_ENVIA
     mensagem['To'] = EMAIL_QUE_RECEBE
@@ -30,9 +32,8 @@ def enviar_email_notificacao(conteudo):
     mensagem.attach(MIMEText(conteudo, 'plain'))
 
     try:
-        # Conectando ao servidor do Gmail (SMTP)
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.starttls()  # Camada de segurança
+        # Mudamos para SMTP_SSL e a porta para 465
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         server.login(EMAIL_QUE_ENVIA, SENHA_DE_APP)
         server.sendmail(EMAIL_QUE_ENVIA, EMAIL_QUE_RECEBE, mensagem.as_string())
         server.quit()
