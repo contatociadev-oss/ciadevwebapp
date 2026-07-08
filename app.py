@@ -20,23 +20,23 @@ SENHA_DE_APP = os.environ.get("GMAIL_PASSWORD")
 EMAIL_QUE_RECEBE = "contato.cia.dev@gmail.com"
 
 def enviar_email_notificacao(conteudo):
-"""Função atualizada para usar SSL na porta 465 (melhor para servidores em nuvem)"""
-mensagem = MIMEMultipart()
-mensagem['From'] = EMAIL_QUE_ENVIA
-mensagem['To'] = EMAIL_QUE_RECEBE
-mensagem['Subject'] = "🚀 Novo Orçamento Recebido - Ultra Dev"
-
-mensagem.attach(MIMEText(conteudo, 'plain'))
-
-try:
-    # Mudamos para SMTP_SSL e a porta para 465
-    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.login(EMAIL_QUE_ENVIA, SENHA_DE_APP)
-    server.sendmail(EMAIL_QUE_ENVIA, EMAIL_QUE_RECEBE, mensagem.as_string())
-    server.quit()
-    print("E-mail enviado com sucesso!")
-except Exception as e:
-    print(f"Erro ao enviar e-mail: {e}")
+    """Função atualizada para usar SSL na porta 465 (melhor para servidores em nuvem)"""
+    mensagem = MIMEMultipart()
+    mensagem['From'] = EMAIL_QUE_ENVIA
+    mensagem['To'] = EMAIL_QUE_RECEBE
+    mensagem['Subject'] = "🚀 Novo Orçamento Recebido - Ultra Dev"
+    
+    mensagem.attach(MIMEText(conteudo, 'plain'))
+    
+    try:
+        # Mudamos para SMTP_SSL e a porta para 465
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server.login(EMAIL_QUE_ENVIA, SENHA_DE_APP)
+        server.sendmail(EMAIL_QUE_ENVIA, EMAIL_QUE_RECEBE, mensagem.as_string())
+        server.quit()
+        print("E-mail enviado com sucesso!")
+    except Exception as e:
+        print(f"Erro ao enviar e-mail: {e}")
 
 
 @app.route('/salvar_orcamento', methods=['POST'])
