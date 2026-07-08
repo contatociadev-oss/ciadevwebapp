@@ -16,7 +16,7 @@ def index():
 # CONFIGURAÇÕES DE E-MAIL (Exemplo usando Gmail)
 # Dica: Para o Gmail, você precisará criar uma "Senha de App" nas configurações de segurança
 EMAIL_QUE_ENVIA = "vinithomazelli@gmail.com"
-SENHA_DE_APP = os.environ.get("GMAIL_PASSWORD")
+SENHA_DE_APP = "ummn rtxc rslb rchs"
 EMAIL_QUE_RECEBE = "contato.cia.dev@gmail.com"
 
 def enviar_email_notificacao(conteudo):
